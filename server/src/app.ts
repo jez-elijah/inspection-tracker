@@ -2,6 +2,7 @@ import express, { type Request, type Response, type NextFunction } from "express
 import cors from "cors";
 import type { Db } from "./db";
 import { authRouter } from "./routes/auth";
+import { inspectionsRouter } from "./routes/inspections";
 
 export function createApp(db: Db) {
   const app = express();
@@ -14,6 +15,7 @@ export function createApp(db: Db) {
   });
 
   app.use("/auth", authRouter(db));
+  app.use("/inspections", inspectionsRouter(db));
 
   // Return JSON errors (e.g. malformed JSON bodies) instead of Express's HTML.
   app.use((err: Error & { status?: number }, _req: Request, res: Response, _next: NextFunction) => {
