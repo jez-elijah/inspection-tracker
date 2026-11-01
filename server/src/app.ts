@@ -18,6 +18,7 @@ export function createApp(db: Db) {
   // Return JSON errors (e.g. malformed JSON bodies) instead of Express's HTML.
   app.use((err: Error & { status?: number }, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status ?? 500;
+    if (status >= 500) console.error(err);
     res.status(status).json({ error: status < 500 ? "Bad request" : "Internal server error" });
   });
 

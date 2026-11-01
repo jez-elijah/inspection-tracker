@@ -5,8 +5,8 @@
   "directories": {
     "test": "tests"
   },
-    "scripts": {
-    "dev": "tsx watch src/index.ts",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "vitest run",
@@ -33,6 +33,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^26.6.5",
     "@types/supertest": "^7.2.1",
+    "cross-env": "^10.1.0",
     "supertest": "^7.3.1",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
