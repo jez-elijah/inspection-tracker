@@ -20,6 +20,16 @@ import {
 type StatusFilter = "all" | Status;
 type SeverityFilter = "all" | Severity;
 
+const statusItems = [
+  { value: "all", label: "All statuses" },
+  { value: "open", label: "Open" },
+  { value: "resolved", label: "Resolved" },
+];
+const severityItems = [
+  { value: "all", label: "All severities" },
+  ...SEVERITIES.map((s) => ({ value: s, label: s })),
+];
+
 function highestSeverity(inspection: InspectionWithFindings): Severity | null {
   let best = -1;
   for (const f of inspection.findings) best = Math.max(best, SEVERITIES.indexOf(f.severity));
@@ -83,7 +93,7 @@ export default function InspectionsPage() {
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
-        <Select value={status} onValueChange={(v) => setStatus((v ?? "all") as StatusFilter)}>
+        <Select items={statusItems} value={status} onValueChange={(v) => setStatus((v ?? "all") as StatusFilter)}>
           <SelectTrigger className="w-44">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
@@ -94,7 +104,7 @@ export default function InspectionsPage() {
           </SelectContent>
         </Select>
 
-        <Select value={severity} onValueChange={(v) => setSeverity((v ?? "all") as SeverityFilter)}>
+        <Select items={severityItems} value={severity} onValueChange={(v) => setSeverity((v ?? "all") as SeverityFilter)}>
           <SelectTrigger className="w-44">
             <SelectValue placeholder="Severity" />
           </SelectTrigger>
